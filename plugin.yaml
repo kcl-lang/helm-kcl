@@ -1,0 +1,11 @@
+name: "kcl"
+# Version is the version of Helm plus the number of official builds for this
+# plugin
+version: "0.1.0"
+usage: "Helm KCL Plugin"
+description: "Helm KCL Plugin"
+useTunnel: true
+command: "$HELM_PLUGIN_DIR/bin/kcl"
+hooks:
+  install: "$HELM_PLUGIN_DIR/install-binary.sh"
+  update: "$HELM_PLUGIN_DIR/install-binary.sh -u"
