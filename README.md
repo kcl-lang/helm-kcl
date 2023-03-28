@@ -1,6 +1,15 @@
 # Helm KCL Plugin
 
-Helm KCL Plugin
+You can use the Helm-KCL-Plugin to
+
++ Modify the `values.yaml` value of the helm charts you rely on by certain conditions or dynamically.
++ Edit the helm charts in a hook way to separate data and logic for the Kubernetes manifests management.
++ For multi-environment and multi-tenant scenarios, you can maintain these configurations gracefully rather than simply copy and paste.
++ Validate all KRM resources using the KCL schema.
+
+## Introduction
+
+[KCL](https://github.com/KusionStack/KCLVM) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
 
 ## Install
 
@@ -28,7 +37,11 @@ curl -L $TARBALL_URL | tar -C $(helm home)/plugins -xzv
 
 + GoLang 1.18+
 
-Make sure you do not have a version of `helm-kcl` installed. You can remove it by running `helm plugin uninstall kcl`.
+Make sure you do not have a version of `helm-kcl` installed. You can remove it by running the command.
+
+```shell
+helm plugin uninstall kcl
+```
 
 ### Installation Steps
 
@@ -38,8 +51,12 @@ Next, depending on which helm version you have, install the plugin into helm.
 
 #### Helm 2
 
+```shell
 make install
+```
 
 #### Helm 3
 
+```shell
 make install/helm3
+```
