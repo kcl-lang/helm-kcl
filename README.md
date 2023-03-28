@@ -1,3 +1,7 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/KusionStack/helm-kcl)](https://goreportcard.com/report/github.com/KusionStack/helm-kcl)
+[![GoDoc](https://godoc.org/github.com/KusionStack/helm-kcl?status.svg)](https://godoc.org/github.com/KusionStack/helm-kcl)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/KusionStack/helm-kcl/blob/main/LICENSE)
+
 # Helm KCL Plugin
 
 You can use the Helm-KCL-Plugin to
