@@ -18,3 +18,5 @@ helmhome/
 
 _build/
 .DS_store
+build
+release

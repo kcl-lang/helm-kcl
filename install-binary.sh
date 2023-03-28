@@ -138,7 +138,7 @@ exit_trap() {
   rmTempDir
   if [ "$result" != "0" ]; then
     echo "Failed to install $PROJECT_NAME"
-    printf '\tFor support, go to https://github.com/databus23/helm-kcl.\n'
+    printf '\tFor support, go to https://github.com/KusionStack/helm-kcl.\n'
   fi
   exit $result
 }

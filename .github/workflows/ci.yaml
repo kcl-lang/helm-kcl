@@ -112,15 +112,3 @@ jobs:
 
       - name: helm plugin install
         run: helm plugin install .
-
-  shell-lint:
-    name: Lint install-binary.sh
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v2.4.0
-      - uses: luizm/action-sh-checker@v0.3.0
-        with:
-          sh_checker_exclude: "scripts"
-          sh_checker_checkbashisms_enable: true
