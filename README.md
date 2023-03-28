@@ -1,19 +1,17 @@
+# Helm KCL Plugin
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/KusionStack/helm-kcl)](https://goreportcard.com/report/github.com/KusionStack/helm-kcl)
 [![GoDoc](https://godoc.org/github.com/KusionStack/helm-kcl?status.svg)](https://godoc.org/github.com/KusionStack/helm-kcl)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/KusionStack/helm-kcl/blob/main/LICENSE)
 
-# Helm KCL Plugin
+[KCL](https://github.com/KusionStack/KCLVM) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
 
-You can use the Helm-KCL-Plugin to
+You can use the `Helm-KCL-Plugin` to
 
 + Modify the `values.yaml` value of the helm charts you rely on by certain conditions or dynamically.
 + Edit the helm charts in a hook way to separate data and logic for the Kubernetes manifests management.
 + For multi-environment and multi-tenant scenarios, you can maintain these configurations gracefully rather than simply copy and paste.
 + Validate all KRM resources using the KCL schema.
-
-## Introduction
-
-[KCL](https://github.com/KusionStack/KCLVM) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
 
 ## Install
 
