@@ -51,9 +51,9 @@ bootstrap:
 	command -v golint || GO111MODULE=off go get -u golang.org/x/lint/golint
 
 .PHONY: docker-run-release
-docker-run-release: export pkg=/go/src/github.com/databus23/helm-kcl
+docker-run-release: export pkg=/go/src/github.com/KusionStack/helm-kcl
 docker-run-release:
-	git checkout master
+	git checkout main
 	git push
 	docker run -it --rm -e GITHUB_TOKEN -v $(shell pwd):$(pkg) -w $(pkg) golang:1.18.1 make bootstrap release
 

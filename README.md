@@ -1,3 +1,7 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/KusionStack/helm-kcl)](https://goreportcard.com/report/github.com/KusionStack/helm-kcl)
+[![GoDoc](https://godoc.org/github.com/KusionStack/helm-kcl?status.svg)](https://godoc.org/github.com/KusionStack/helm-kcl)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/KusionStack/helm-kcl/blob/main/LICENSE)
+
 # Helm KCL Plugin
 
 You can use the Helm-KCL-Plugin to
@@ -59,4 +63,35 @@ make install
 
 ```shell
 make install/helm3
+```
+
+## Build
+
+### Prerequisites
+
++ GoLang 1.18+
+
+```shell
+git clone https://github.com/KusionStack/helm-kcl.git
+```
+
+## Test
+
+```shell
+go test -v ./...
+```
+
+## Release
+
+Bump version in `plugin.yaml`:
+
+```shell
+code plugin.yaml
+git commit -m 'Bump helm-diff version to 3.x.y'
+```
+
+Set `GITHUB_TOKEN` and run:
+
+```shell
+make docker-run-release
 ```
