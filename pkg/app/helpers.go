@@ -37,12 +37,6 @@ func IsDebug() bool {
 	return os.Getenv("HELM_DEBUG") == "true"
 }
 
-func debugPrint(format string, a ...interface{}) {
-	if IsDebug() {
-		fmt.Printf(format+"\n", a...)
-	}
-}
-
 func AddCommonCmdOptions(f *flag.FlagSet) {
 	settings.AddFlagsTLS(f)
 	settings.InitTLS(f)
@@ -50,7 +44,7 @@ func AddCommonCmdOptions(f *flag.FlagSet) {
 	f.StringVar((*string)(&settings.Home), "home", DefaultHelmHome, "location of your Helm config. Overrides $HELM_HOME")
 }
 
-func createHelmClient() helm.Interface {
+func CreateHelmClient() helm.Interface {
 	options := []helm.Option{helm.Host(os.Getenv("TILLER_HOST")), helm.ConnectTimeout(int64(30))}
 
 	if settings.TLSVerify || settings.TLSEnable {
@@ -82,6 +76,12 @@ func ExpandTLSPaths() {
 	settings.TLSCaCertFile = os.ExpandEnv(settings.TLSCaCertFile)
 	settings.TLSCertFile = os.ExpandEnv(settings.TLSCertFile)
 	settings.TLSKeyFile = os.ExpandEnv(settings.TLSKeyFile)
+}
+
+func debugPrint(format string, a ...interface{}) {
+	if IsDebug() {
+		fmt.Printf(format+"\n", a...)
+	}
 }
 
 func outputWithRichError(cmd *exec.Cmd) ([]byte, error) {

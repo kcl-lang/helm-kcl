@@ -9,6 +9,7 @@ import (
 // Version identifier populated via the CI/CD process.
 var Version = "HEAD"
 
+// NewVersionCmd returns the version command.
 func NewVersionCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "version",

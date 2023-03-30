@@ -7,7 +7,7 @@ import (
 	"kusionstack.io/helm-kcl/pkg/config"
 )
 
-// NewTemplateCmd returm template subcmd
+// NewTemplateCmd returns the template command.
 func NewTemplateCmd() *cobra.Command {
 	templateOptions := config.NewTemplateOptions()
 

@@ -7,6 +7,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+// NewLogger returns the application logger.
 func NewLogger(writer io.Writer, logLevel string) *zap.SugaredLogger {
 	var cfg zapcore.EncoderConfig
 	cfg.MessageKey = "message"

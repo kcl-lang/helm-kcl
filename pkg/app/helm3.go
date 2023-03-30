@@ -19,6 +19,7 @@ var (
 	minHelmVersion = semver.MustParse("v3.1.0-rc.1")
 )
 
+// HelmBin returns the helm binary path.
 func HelmBin() string {
 	helmBin := DefaultHelmBinary
 	if os.Getenv("HELM_BIN") != "" {

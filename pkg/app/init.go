@@ -55,5 +55,5 @@ type helmRecommendedPlugin struct {
 }
 
 func New() *App {
-	return &App{helmBinary: DefaultHelmBinary, logger: NewLogger(os.Stdout, "debug"), helm: createHelmClient()}
+	return &App{helmBinary: DefaultHelmBinary, logger: NewLogger(os.Stdout, "debug"), helm: CreateHelmClient()}
 }

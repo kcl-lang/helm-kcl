@@ -13,9 +13,9 @@ The Helm KCL Plugin.
 // New creates a new cobra client
 func New() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "kcl",
-		Short: "Edit, transformer, validate Helm charts using the KCL programming language.",
-		Long:  rootCmdLongUsage,
+		Use:          "kcl",
+		Short:        "Edit, transformer, validate Helm charts using the KCL programming language.",
+		Long:         rootCmdLongUsage,
 		SilenceUsage: true,
 	}
 

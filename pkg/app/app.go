@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"sync"
 
 	"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
 	"go.uber.org/zap"
@@ -14,8 +13,6 @@ import (
 	"kusionstack.io/kpt-kcl-sdk/pkg/process"
 )
 
-var CleanWaitGroup sync.WaitGroup
-
 // App is the main application object.
 type App struct {
 	helmBinary string
@@ -23,16 +20,7 @@ type App struct {
 	helm       helm.Interface
 }
 
-type HelmRelease struct {
-	Name      string `json:"name"`
-	Namespace string `json:"namespace"`
-	Enabled   bool   `json:"enabled"`
-	Installed bool   `json:"installed"`
-	Labels    string `json:"labels"`
-	Chart     string `json:"chart"`
-	Version   string `json:"version"`
-}
-
+// Template of App run the
 func (app *App) Template(templateImpl *config.TemplateImpl) error {
 	kclRun, err := config.FromFile(templateImpl.File)
 	if err != nil {
