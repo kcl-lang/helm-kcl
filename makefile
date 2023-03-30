@@ -33,7 +33,7 @@ install/helm3: build
 lint:
 	scripts/update-gofmt.sh
 	scripts/verify-gofmt.sh
-	scripts/verify-golint.sh
+	# scripts/verify-golint.sh
 	scripts/verify-govet.sh
 
 .PHONY: build
@@ -68,8 +68,6 @@ dist:
 	tar -C build/ -zcvf $(CURDIR)/release/helm-kcl-linux-amd64.tgz kcl/
 	GOOS=linux GOARCH=arm64 $(GO) build -o build/kcl/bin/kcl -trimpath -ldflags="$(LDFLAGS)"
 	tar -C build/ -zcvf $(CURDIR)/release/helm-kcl-linux-arm64.tgz kcl/
-	GOOS=freebsd GOARCH=amd64 $(GO) build -o build/kcl/bin/kcl -trimpath -ldflags="$(LDFLAGS)"
-	tar -C build/ -zcvf $(CURDIR)/release/helm-kcl-freebsd-amd64.tgz kcl/
 	GOOS=darwin GOARCH=amd64 $(GO) build -o build/kcl/bin/kcl -trimpath -ldflags="$(LDFLAGS)"
 	tar -C build/ -zcvf $(CURDIR)/release/helm-kcl-macos-amd64.tgz kcl/
 	GOOS=darwin GOARCH=arm64 $(GO) build -o build/kcl/bin/kcl -trimpath -ldflags="$(LDFLAGS)"

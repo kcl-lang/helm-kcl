@@ -102,6 +102,8 @@ helm create my-chart
 
 ```shell
 git clone https://github.com/KusionStack/helm-kcl.git
+cd helm-kcl
+go run main.go
 ```
 
 ## Test
@@ -116,7 +118,7 @@ Bump version in `plugin.yaml`:
 
 ```shell
 code plugin.yaml
-git commit -m 'Bump helm-diff version to 3.x.y'
+git commit -m 'Bump helm-diff version to 0.x.y'
 ```
 
 Set `GITHUB_TOKEN` and run:
