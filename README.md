@@ -88,12 +88,6 @@ make install
 make install/helm3
 ```
 
-## Quick Start
-
-```shell
-helm create my-chart
-```
-
 ## Build
 
 ### Prerequisites
