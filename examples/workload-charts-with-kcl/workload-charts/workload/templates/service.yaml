@@ -1,0 +1,22 @@
+---
+# Source: workload/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name
+  labels:
+    helm.sh/chart: workload-0.1.0
+    app.kubernetes.io/name: release-name
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: release-name
+    app.kubernetes.io/instance: release-name
+  ports:
+    - name: www
+      port: 80
+      protocol: TCP
+      targetPort: 80

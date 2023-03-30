@@ -16,9 +16,11 @@ func New() *cobra.Command {
 		Use:   "kcl",
 		Short: "Edit, transformer, validate Helm charts using the KCL programming language.",
 		Long:  rootCmdLongUsage,
+		SilenceUsage: true,
 	}
 
-	cmd.AddCommand(newVersionCmd())
+	cmd.AddCommand(NewVersionCmd())
+	cmd.AddCommand(NewTemplateCmd())
 	cmd.SetHelpCommand(&cobra.Command{}) // Disable the help command
 	return cmd
 }

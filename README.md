@@ -13,6 +13,31 @@ You can use the `Helm-KCL-Plugin` to
 + For multi-environment and multi-tenant scenarios, you can maintain these configurations gracefully rather than simply copy and paste.
 + Validate all KRM resources using the KCL schema.
 
+## Prerequisites
+
++ Install Helm
++ Golang (at least version 1.18)
+
+## Test the Plugin
+
+You need to put your KCL script source in the functionConfig of kind KCLRun and then the function will run the KCL script that you provide.
+
+```bash
+# Verify that the annotation is added to the `Deployment` resource and the other resource `Service` 
+# does not have this annotation.
+diff \
+  <(helm template ./examples/workload-charts-with-kcl/workload-charts) \
+  <(go run main.go template --file ./examples/workload-charts-with-kcl/kcl-run.yaml) |\
+  grep annotations -A1
+```
+
+The output is
+
+```diff
+>   annotations:
+>     managed-by: helm-kcl-plugin
+```
+
 ## Install
 
 ### Using Helm plugin manager (> 2.3.x)
@@ -61,6 +86,12 @@ make install
 
 ```shell
 make install/helm3
+```
+
+## Quick Start
+
+```shell
+helm create my-chart
 ```
 
 ## Build

@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 0.1.0
+description: A helm chart to provision standard workloads.
+name: workload
+type: application
+version: 0.1.0

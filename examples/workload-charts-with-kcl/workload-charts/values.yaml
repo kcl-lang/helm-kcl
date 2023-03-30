@@ -1,0 +1,16 @@
+#
+# Default values for the chart (for reference only).
+# An actual values file is rendered from the source SCORE file by the CLI tool.
+
+containers:
+  frontend:
+    image:
+      name: nginx:alpine
+
+service:
+  type: ClusterIP
+  ports:
+    - name: www
+      protocol: TCP
+      port: 80
+      targetPort: 80
