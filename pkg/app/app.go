@@ -47,40 +47,49 @@ func (app *App) runHelm3Template(kclRunFile, release, chart string) error {
 		app.logger.Error(err)
 		return err
 	}
-	d := diffCmd{
+	e := executor{
 		release: release,
 		chart:   chart,
 		dryRun:  true,
 	}
 	// Kubernetes manifests
-	template, err := d.template(false)
+	manifests, err := e.template(false)
 	if err != nil {
 		return err
 	}
 	// KCL function config
-	fnCfgBytes, err := os.ReadFile(kclRunFile)
+	fnCfg, err := os.ReadFile(kclRunFile)
 	if err != nil {
 		return err
 	}
-	items, err := fn.ParseKubeObjects(template)
+	result, err := app.doMutate(manifests, fnCfg)
 	if err != nil {
 		return err
 	}
-	fnCfg, err := fn.ParseKubeObject(fnCfgBytes)
+	fmt.Println(result)
+	return nil
+}
+
+func (app *App) doMutate(manifests, fnCfg []byte) (string, error) {
+	items, err := fn.ParseKubeObjects(manifests)
 	if err != nil {
-		return err
+		return "", err
 	}
+	functionConfig, err := fn.ParseKubeObject(fnCfg)
+	if err != nil {
+		return "", err
+	}
+	// Construct resource list.
 	resourceList := &fn.ResourceList{
 		Items:          items,
-		FunctionConfig: fnCfg,
+		FunctionConfig: functionConfig,
 	}
 	result, err := process.Process(resourceList)
 	if err != nil {
-		return err
+		return "", err
 	}
 	if !result {
-		return errors.New(resourceList.Results.Error())
+		return "", errors.New(resourceList.Results.Error())
 	}
-	fmt.Println(resourceList.Items.String())
-	return nil
+	return resourceList.Items.String(), nil
 }

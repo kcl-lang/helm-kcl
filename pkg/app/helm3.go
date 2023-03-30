@@ -92,7 +92,7 @@ func getChart(release, namespace string) (string, error) {
 	return string(out), nil
 }
 
-type diffCmd struct {
+type executor struct {
 	release                  string
 	chart                    string
 	chartVersion             string
@@ -116,53 +116,52 @@ type diffCmd struct {
 	postRenderer             string
 	install                  bool
 	normalizeManifests       bool
-	threeWayMerge            bool
 	extraAPIs                []string
 	kubeVersion              string
 	useUpgradeDryRun         bool
 	isAllowUnreleased        bool
 }
 
-func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
+func (e *executor) template(isUpgrade bool) ([]byte, error) {
 	flags := []string{}
-	if d.devel {
+	if e.devel {
 		flags = append(flags, "--devel")
 	}
-	if d.noHooks && !d.useUpgradeDryRun {
+	if e.noHooks && !e.useUpgradeDryRun {
 		flags = append(flags, "--no-hooks")
 	}
-	if d.chartVersion != "" {
-		flags = append(flags, "--version", d.chartVersion)
+	if e.chartVersion != "" {
+		flags = append(flags, "--version", e.chartVersion)
 	}
-	if d.chartRepo != "" {
-		flags = append(flags, "--repo", d.chartRepo)
+	if e.chartRepo != "" {
+		flags = append(flags, "--repo", e.chartRepo)
 	}
-	if d.namespace != "" {
-		flags = append(flags, "--namespace", d.namespace)
+	if e.namespace != "" {
+		flags = append(flags, "--namespace", e.namespace)
 	}
-	if d.postRenderer != "" {
-		flags = append(flags, "--post-renderer", d.postRenderer)
+	if e.postRenderer != "" {
+		flags = append(flags, "--post-renderer", e.postRenderer)
 	}
 
-	shouldDefaultReusingValues := isUpgrade && len(d.values) == 0 && len(d.stringValues) == 0 && len(d.valueFiles) == 0 && len(d.fileValues) == 0
-	if (d.reuseValues || shouldDefaultReusingValues) && !d.resetValues && !d.dryRun {
+	shouldDefaultReusingValues := isUpgrade && len(e.values) == 0 && len(e.stringValues) == 0 && len(e.valueFiles) == 0 && len(e.fileValues) == 0
+	if (e.reuseValues || shouldDefaultReusingValues) && !e.resetValues && !e.dryRun {
 		tmpfile, err := ioutil.TempFile("", "existing-values")
 		if err != nil {
 			return nil, err
 		}
 		defer os.Remove(tmpfile.Name())
-		if err := d.writeExistingValues(tmpfile); err != nil {
+		if err := e.writeExistingValues(tmpfile); err != nil {
 			return nil, err
 		}
 		flags = append(flags, "--values", tmpfile.Name())
 	}
-	for _, value := range d.values {
+	for _, value := range e.values {
 		flags = append(flags, "--set", value)
 	}
-	for _, stringValue := range d.stringValues {
+	for _, stringValue := range e.stringValues {
 		flags = append(flags, "--set-string", stringValue)
 	}
-	for _, valueFile := range d.valueFiles {
+	for _, valueFile := range e.valueFiles {
 		if strings.TrimSpace(valueFile) == "-" {
 			bytes, err := ioutil.ReadAll(os.Stdin)
 			if err != nil {
@@ -189,11 +188,11 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 			flags = append(flags, "--values", valueFile)
 		}
 	}
-	for _, fileValue := range d.fileValues {
+	for _, fileValue := range e.fileValues {
 		flags = append(flags, "--set-file", fileValue)
 	}
 
-	if d.disableOpenAPIValidation {
+	if e.disableOpenAPIValidation {
 		flags = append(flags, "--disable-openapi-validation")
 	}
 
@@ -202,12 +201,12 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 		filter func([]byte) []byte
 	)
 
-	if d.useUpgradeDryRun {
-		if d.dryRun {
+	if e.useUpgradeDryRun {
+		if e.dryRun {
 			return nil, fmt.Errorf("`diff upgrade --dry-run` conflicts with HELM_DIFF_USE_UPGRADE_DRY_RUN_AS_TEMPLATE. Either remove --dry-run to enable cluster access, or unset HELM_DIFF_USE_UPGRADE_DRY_RUN_AS_TEMPLATE to make cluster access unnecessary")
 		}
 
-		if d.isAllowUnreleased {
+		if e.isAllowUnreleased {
 			// Otherwise you get the following error when this is a diff for a new install
 			//   Error: UPGRADE FAILED: "$RELEASE_NAME" has no deployed releases
 			flags = append(flags, "--install")
@@ -216,10 +215,10 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 		flags = append(flags, "--dry-run")
 		subcmd = "upgrade"
 		filter = func(s []byte) []byte {
-			return extractManifestFromHelmUpgradeDryRunOutput(s, d.noHooks)
+			return extractManifestFromHelmUpgradeDryRunOutput(s, e.noHooks)
 		}
 	} else {
-		if !d.disableValidation && !d.dryRun {
+		if !e.disableValidation && !e.dryRun {
 			flags = append(flags, "--validate")
 		}
 
@@ -227,12 +226,12 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 			flags = append(flags, "--is-upgrade")
 		}
 
-		for _, a := range d.extraAPIs {
+		for _, a := range e.extraAPIs {
 			flags = append(flags, "--api-versions", a)
 		}
 
-		if d.kubeVersion != "" {
-			flags = append(flags, "--kube-version", d.kubeVersion)
+		if e.kubeVersion != "" {
+			flags = append(flags, "--kube-version", e.kubeVersion)
 		}
 
 		subcmd = "template"
@@ -242,7 +241,7 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 		}
 	}
 
-	args := []string{subcmd, d.release, d.chart}
+	args := []string{subcmd, e.release, e.chart}
 	args = append(args, flags...)
 
 	cmd := exec.Command(HelmBin(), args...)
@@ -250,8 +249,8 @@ func (d *diffCmd) template(isUpgrade bool) ([]byte, error) {
 	return filter(out), err
 }
 
-func (d *diffCmd) writeExistingValues(f *os.File) error {
-	cmd := exec.Command(HelmBin(), "get", "values", d.release, "--all", "--output", "yaml")
+func (e *executor) writeExistingValues(f *os.File) error {
+	cmd := exec.Command(HelmBin(), "get", "values", e.release, "--all", "--output", "yaml")
 	debugPrint("Executing %s", strings.Join(cmd.Args, " "))
 	defer f.Close()
 	cmd.Stdout = f

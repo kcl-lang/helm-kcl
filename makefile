@@ -85,3 +85,7 @@ release: lint dist
 .PHONY: test-plugin-installation
 test-plugin-installation:
 	docker build -f testdata/Dockerfile.install .
+
+.PHONY: test
+test:
+	go test -v ./...
