@@ -14,30 +14,6 @@ You can use the `Helm-KCL-Plugin` to
 
 ## Install
 
-## Quick Start
-
-```shell
-helm kcl template --file ./examples/workload-charts-with-kcl/kcl-run.yaml
-```
-
-The content of `kcl-run.yaml` looks like this:
-
-```yaml
-# kcl-config.yaml
-apiVersion: fn.kpt.dev/v1alpha1
-kind: KCLRun
-metadata:
-  name: set-annotation
-# EDIT THE SOURCE!
-# This should be your KCL code which preloads the `ResourceList` to `option("resource_list")
-source: |
-  [resource | {if resource.kind == "Deployment": metadata.annotations: {"managed-by" = "helm-kcl-plugin"}} for resource in option("resource_list").items]
-
-repositories:
-  - name: workload
-    path: ./workload-charts
-```
-
 ### Using Helm plugin manager (> 2.3.x)
 
 ```shell
@@ -84,6 +60,30 @@ make install
 
 ```shell
 make install/helm3
+```
+
+## Quick Start
+
+```shell
+helm kcl template --file ./examples/workload-charts-with-kcl/kcl-run.yaml
+```
+
+The content of `kcl-run.yaml` looks like this:
+
+```yaml
+# kcl-config.yaml
+apiVersion: fn.kpt.dev/v1alpha1
+kind: KCLRun
+metadata:
+  name: set-annotation
+# EDIT THE SOURCE!
+# This should be your KCL code which preloads the `ResourceList` to `option("resource_list")
+source: |
+  [resource | {if resource.kind == "Deployment": metadata.annotations: {"managed-by" = "helm-kcl-plugin"}} for resource in option("resource_list").items]
+
+repositories:
+  - name: workload
+    path: ./workload-charts
 ```
 
 ## Build
