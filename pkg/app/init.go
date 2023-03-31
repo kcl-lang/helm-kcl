@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"kusionstack.io/helm-kcl/pkg/helm"
 )
 
 const (
@@ -55,5 +57,5 @@ type helmRecommendedPlugin struct {
 }
 
 func New() *App {
-	return &App{helmBinary: DefaultHelmBinary, logger: NewLogger(os.Stdout, "debug"), helm: CreateHelmClient()}
+	return &App{helmBinary: DefaultHelmBinary, logger: NewLogger(os.Stdout, "debug"), render: helm.Render{}}
 }

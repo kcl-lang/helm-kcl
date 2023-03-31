@@ -8,8 +8,8 @@ import (
 
 	"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
 	"go.uber.org/zap"
-	"k8s.io/helm/pkg/helm"
 	"kusionstack.io/helm-kcl/pkg/config"
+	"kusionstack.io/helm-kcl/pkg/helm"
 	"kusionstack.io/kpt-kcl-sdk/pkg/process"
 )
 
@@ -17,7 +17,7 @@ import (
 type App struct {
 	helmBinary string
 	logger     *zap.SugaredLogger
-	helm       helm.Interface
+	render     helm.Render
 }
 
 // Template of App run the
@@ -31,29 +31,16 @@ func (app *App) Template(templateImpl *config.TemplateImpl) error {
 		if !filepath.IsAbs(repo.Path) {
 			path = filepath.Join(filepath.Dir(templateImpl.File), repo.Path)
 		}
-		if IsHelm3() {
-			if err := app.runHelm3Template(templateImpl.File, repo.Name, path); err != nil {
-				return err
-			}
-		} else {
-			return errors.New("Helm 2 is not supported yet")
+		if err := app.template(templateImpl.File, repo.Name, path); err != nil {
+			return err
 		}
 	}
 	return nil
 }
 
-func (app *App) runHelm3Template(kclRunFile, release, chart string) error {
-	if err := compatibleHelm3Version(); err != nil {
-		app.logger.Error(err)
-		return err
-	}
-	e := executor{
-		release: release,
-		chart:   chart,
-		dryRun:  true,
-	}
-	// Kubernetes manifests
-	manifests, err := e.template(false)
+func (app *App) template(kclRunFile, release, chartDir string) error {
+	// Generate Kubernetes manifests from helm charts.
+	manifests, err := app.renderManifests(release, chartDir)
 	if err != nil {
 		return err
 	}
@@ -68,6 +55,19 @@ func (app *App) runHelm3Template(kclRunFile, release, chart string) error {
 	}
 	fmt.Println(result)
 	return nil
+}
+
+// Generate Kubernetes manifests from helm charts.
+func (app *App) renderManifests(release, chartDir string) ([]byte, error) {
+	chart, err := app.render.LoadChartFromLocalDirectory(chartDir)
+	if err != nil {
+		return nil, err
+	}
+	manifests, err := app.render.GenerateManifests(release, fn.DefaultNamespace, chart, nil)
+	if err != nil {
+		return nil, err
+	}
+	return manifests, nil
 }
 
 func (app *App) doMutate(manifests, fnCfg []byte) (string, error) {

@@ -1,4 +1,4 @@
-package app
+package helm
 
 // This file contains functions that where blatantly copied from
 // https://github.wdf.sap.corp/kubernetes/helm
@@ -52,6 +52,14 @@ func (v *valueFiles) Set(value string) error {
 		*v = append(*v, filePath)
 	}
 	return nil
+}
+
+func IsHelm3() bool {
+	return os.Getenv("TILLER_HOST") == ""
+}
+
+func IsDebug() bool {
+	return os.Getenv("HELM_DEBUG") == "true"
 }
 
 func locateChartPath(name, version string, verify bool, keyring string) (string, error) {
