@@ -8,37 +8,35 @@
 
 You can use the `Helm-KCL-Plugin` to
 
-+ Modify the `values.yaml` value of the helm charts you rely on by certain conditions or dynamically.
 + Edit the helm charts in a hook way to separate data and logic for the Kubernetes manifests management.
 + For multi-environment and multi-tenant scenarios, you can maintain these configurations gracefully rather than simply copy and paste.
 + Validate all KRM resources using the KCL schema.
 
-## Prerequisites
-
-+ Install Helm
-+ Golang (at least version 1.18)
-
-## Test the Plugin
-
-You need to put your KCL script source in the functionConfig of kind KCLRun and then the function will run the KCL script that you provide.
-
-```bash
-# Verify that the annotation is added to the `Deployment` resource and the other resource `Service` 
-# does not have this annotation.
-diff \
-  <(helm template ./examples/workload-charts-with-kcl/workload-charts) \
-  <(go run main.go template --file ./examples/workload-charts-with-kcl/kcl-run.yaml) |\
-  grep annotations -A1
-```
-
-The output is
-
-```diff
->   annotations:
->     managed-by: helm-kcl-plugin
-```
-
 ## Install
+
+## Quick Start
+
+```shell
+helm kcl template --file ./examples/workload-charts-with-kcl/kcl-run.yaml
+```
+
+The content of `kcl-run.yaml` looks like this:
+
+```yaml
+# kcl-config.yaml
+apiVersion: fn.kpt.dev/v1alpha1
+kind: KCLRun
+metadata:
+  name: set-annotation
+# EDIT THE SOURCE!
+# This should be your KCL code which preloads the `ResourceList` to `option("resource_list")
+source: |
+  [resource | {if resource.kind == "Deployment": metadata.annotations: {"managed-by" = "helm-kcl-plugin"}} for resource in option("resource_list").items]
+
+repositories:
+  - name: workload
+    path: ./workload-charts
+```
 
 ### Using Helm plugin manager (> 2.3.x)
 
@@ -58,9 +56,9 @@ E.g.
 curl -L $TARBALL_URL | tar -C $(helm home)/plugins -xzv
 ```
 
-## From Source
+### Install From Source
 
-### Prerequisites
+#### Prerequisites
 
 + GoLang 1.18+
 
@@ -70,19 +68,19 @@ Make sure you do not have a version of `helm-kcl` installed. You can remove it b
 helm plugin uninstall kcl
 ```
 
-### Installation Steps
+#### Installation Steps
 
 The first step is to download the repository and enter the directory. You can do this via git clone or downloading and extracting the release. If you clone via git, remember to check out the latest tag for the latest release.
 
 Next, depending on which helm version you have, install the plugin into helm.
 
-#### Helm 2
+##### Helm 2
 
 ```shell
 make install
 ```
 
-#### Helm 3
+##### Helm 3
 
 ```shell
 make install/helm3
@@ -102,8 +100,30 @@ go run main.go
 
 ## Test
 
+### Unit Test
+
 ```shell
 go test -v ./...
+```
+
+### Integration Test
+
+You need to put your KCL script source in the functionConfig of kind KCLRun and then the function will run the KCL script that you provide.
+
+```bash
+# Verify that the annotation is added to the `Deployment` resource and the other resource `Service` 
+# does not have this annotation.
+diff \
+  <(helm template ./examples/workload-charts-with-kcl/workload-charts) \
+  <(go run main.go template --file ./examples/workload-charts-with-kcl/kcl-run.yaml) |\
+  grep annotations -A1
+```
+
+The output is
+
+```diff
+>   annotations:
+>     managed-by: helm-kcl-plugin
 ```
 
 ## Release
@@ -120,3 +140,15 @@ Set `GITHUB_TOKEN` and run:
 ```shell
 make docker-run-release
 ```
+
+## Guides for Developing KCL
+
+Here's what you can do in the KCL script:
+
++ Read resources from `option("resource_list")`. The `option("resource_list")` complies with the [KRM Functions Specification](https://kpt.dev/book/05-developing-functions/01-functions-specification). You can read the input resources from `option("resource_list")["items"]` and the `functionConfig` from `option("resource_list")["functionConfig"]`.
++ Return a KPM list for output resources.
++ Read the environment variables. e.g. `option("PATH")`.
++ Read the OpenAPI schema. e.g. `option("open_api")["definitions"]["io.k8s.api.apps.v1.Deployment"]`
++ Return an error using `assert {condition}, {error_message}`.
+
+Full documents of KCL can be found [here](https://kcl-lang.io/).
