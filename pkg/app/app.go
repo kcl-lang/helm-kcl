@@ -3,11 +3,13 @@ package app
 import (
 	"errors"
 	"fmt"
+	"net/url"
 	"os"
 	"path/filepath"
 
 	"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
 	"go.uber.org/zap"
+	"helm.sh/helm/v3/pkg/chart"
 	"kusionstack.io/helm-kcl/pkg/config"
 	"kusionstack.io/helm-kcl/pkg/helm"
 	"kusionstack.io/kpt-kcl-sdk/pkg/process"
@@ -27,9 +29,9 @@ func (app *App) Template(templateImpl *config.TemplateImpl) error {
 		return err
 	}
 	for _, repo := range kclRun.Repositories {
-		path := repo.Path
-		if !filepath.IsAbs(repo.Path) {
-			path = filepath.Join(filepath.Dir(templateImpl.File), repo.Path)
+		path, err := app.chartPathFromRepo(templateImpl.File, repo)
+		if err != nil {
+			return err
 		}
 		if err := app.template(templateImpl.File, repo.Name, path); err != nil {
 			return err
@@ -38,9 +40,23 @@ func (app *App) Template(templateImpl *config.TemplateImpl) error {
 	return nil
 }
 
-func (app *App) template(kclRunFile, release, chartDir string) error {
+func (app *App) chartPathFromRepo(file string, repo config.RepositorySpec) (path string, err error) {
+	if repo.URL != "" {
+		path = repo.URL
+	} else if repo.Path != "" {
+		path = repo.Path
+		if !filepath.IsAbs(repo.Path) {
+			path = filepath.Join(filepath.Dir(file), repo.Path)
+		}
+	} else {
+		return "", errors.New("no valid helm chart path, it should be from a local path or a url")
+	}
+	return path, nil
+}
+
+func (app *App) template(kclRunFile, release, chartPath string) error {
 	// Generate Kubernetes manifests from helm charts.
-	manifests, err := app.renderManifests(release, chartDir)
+	manifests, err := app.renderManifests(release, chartPath)
 	if err != nil {
 		return err
 	}
@@ -58,10 +74,22 @@ func (app *App) template(kclRunFile, release, chartDir string) error {
 }
 
 // Generate Kubernetes manifests from helm charts.
-func (app *App) renderManifests(release, chartDir string) ([]byte, error) {
-	chart, err := app.render.LoadChartFromLocalDirectory(chartDir)
+func (app *App) renderManifests(release, chartPath string) ([]byte, error) {
+	var chart *chart.Chart
+	_, err := url.Parse(chartPath)
+	// Load from url
 	if err != nil {
-		return nil, err
+		// Load from url
+		chart, err = app.render.LoadChartFromRemoteCharts(chartPath)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		// Load from local path
+		chart, err = app.render.LoadChartFromLocalDirectory(chartPath)
+		if err != nil {
+			return nil, err
+		}
 	}
 	manifests, err := app.render.GenerateManifests(release, fn.DefaultNamespace, chart, nil)
 	if err != nil {

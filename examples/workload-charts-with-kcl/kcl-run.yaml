@@ -11,7 +11,5 @@ source: |
 repositories:
   - name: workload
     path: ./workload-charts
-    # TDDO:
-    # url
-    # git
-    # oci
+  # - name: nginx-ingress
+  #   url: https://github.com/nginxinc/kubernetes-ingress/tree/v3.1.0/deployments/helm-chart
