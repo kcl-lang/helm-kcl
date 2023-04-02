@@ -132,7 +132,7 @@ Bump version in `plugin.yaml`:
 
 ```shell
 code plugin.yaml
-git commit -m 'Bump helm-diff version to 0.x.y'
+git commit -m 'Bump helm-kcl version to 0.x.y'
 ```
 
 Set `GITHUB_TOKEN` and run:
@@ -152,3 +152,11 @@ Here's what you can do in the KCL script:
 + Return an error using `assert {condition}, {error_message}`.
 
 Full documents of KCL can be found [here](https://kcl-lang.io/).
+
+## Thanks
+
++ [helmfile](https://github.com/helmfile/helmfile)
++ [helm-diff](https://github.com/databus23/helm-diff)
++ [helm-secrets](https://github.com/jkroepke/helm-secrets)
++ [helm-s3](https://github.com/hypnoglow/helm-s3)
++ [helm-git](https://github.com/aslafy-z/helm-git)
