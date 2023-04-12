@@ -12,6 +12,10 @@ LDFLAGS += -X k8s.io/helm/pkg/version.Version=$(shell ./scripts/dep-helm-version
 
 GO ?= go
 
+.PHONY: run
+run:
+	go run main.go template --file ./examples/workload-charts-with-kcl/kcl-run.yaml
+
 .PHONY: format
 format:
 	test -z "$$(find . -type f -o -name '*.go' -exec gofmt -d {} + | tee /dev/stderr)" || \
@@ -85,7 +89,3 @@ release: lint dist
 .PHONY: test-plugin-installation
 test-plugin-installation:
 	docker build -f testdata/Dockerfile.install .
-
-.PHONY: test
-test:
-	go test -v ./...
