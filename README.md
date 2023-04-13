@@ -86,6 +86,58 @@ repositories:
     path: ./workload-charts
 ```
 
+The output is:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: workload
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: workload
+    app.kubernetes.io/version: 0.1.0
+    helm.sh/chart: workload-0.1.0
+  name: workload
+spec:
+  ports:
+  - name: www
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/instance: workload
+    app.kubernetes.io/name: workload
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: workload
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: workload
+    app.kubernetes.io/version: 0.1.0
+    helm.sh/chart: workload-0.1.0
+  name: workload
+  annotations:
+    managed-by: helm-kcl-plugin
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: workload
+      app.kubernetes.io/name: workload
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: workload
+        app.kubernetes.io/name: workload
+    spec:
+      containers:
+      - image: "nginx:alpine"
+        name: frontend
+```
+
 ## Build
 
 ### Prerequisites
