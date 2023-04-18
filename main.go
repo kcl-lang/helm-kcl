@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
+	_ "github.com/KusionStack/krm-kcl/pkg/config"
 	"kusionstack.io/helm-kcl/cmd"
 	_ "kusionstack.io/kclvm-go"
-	_ "kusionstack.io/kpt-kcl-sdk/pkg/config"
 )
 
 func main() {

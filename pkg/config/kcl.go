@@ -3,8 +3,8 @@ package config
 import (
 	"os"
 
+	"github.com/KusionStack/krm-kcl/pkg/config"
 	"gopkg.in/yaml.v2"
-	"kusionstack.io/kpt-kcl-sdk/pkg/config"
 )
 
 // KCLRun is a custom resource to provider Helm kcl config including KCL source and params.

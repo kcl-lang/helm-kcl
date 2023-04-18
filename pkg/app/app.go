@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 
 	"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
+	"github.com/KusionStack/krm-kcl/pkg/process"
 	"go.uber.org/zap"
 	"helm.sh/helm/v3/pkg/chart"
 	"kusionstack.io/helm-kcl/pkg/config"
 	"kusionstack.io/helm-kcl/pkg/helm"
-	"kusionstack.io/kpt-kcl-sdk/pkg/process"
 )
 
 // App is the main application object.
