@@ -5,4 +5,4 @@ if [ "$1" == "" ]; then
 fi
 git tag $1
 git push origin $1
-gh release create $1 --draft --generate-notes --title "$1" release/*.tgz
+gh release create $1 --draft --generate-notes --title "$1 Release" release/*.tgz

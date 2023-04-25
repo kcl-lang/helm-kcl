@@ -48,8 +48,8 @@ github.com/GoogleContainerTools/kpt-functions-sdk/go/api v0.0.0-20220720212527-1
 github.com/GoogleContainerTools/kpt-functions-sdk/go/api v0.0.0-20220720212527-133180134b93/go.mod h1:gkK43tTaPXFNASpbIbQImzhmt1hdcdin++kvzTblykc=
 github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230302070146-e8e9cb3c3ae2 h1:GDUCDAY2ijsUjg70QPMvWKezRxGKKzU07ckVc5uTgZA=
 github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230302070146-e8e9cb3c3ae2/go.mod h1:Pnd3ImgaWS3OBVjztSiGMACMf+CDs20l5nT5Oljy/tA=
-github.com/KusionStack/krm-kcl v0.0.0-20230418113804-d36ac5ce2533 h1:HIl/35Xz2CfGiXcHeXq/F/+hnUNWwL98Auco/eVkBWg=
-github.com/KusionStack/krm-kcl v0.0.0-20230418113804-d36ac5ce2533/go.mod h1:V8b6lxmZTgmWPgC2uEtxB6sNqTyFVgN3VRBbmGGwYyI=
+github.com/KusionStack/krm-kcl v0.0.0-20230425151359-c282430ece78 h1:F2HBn5iQVExU8LReCDbR6MFf32asbjVm7z6kprTGVWE=
+github.com/KusionStack/krm-kcl v0.0.0-20230425151359-c282430ece78/go.mod h1:V8b6lxmZTgmWPgC2uEtxB6sNqTyFVgN3VRBbmGGwYyI=
 github.com/MakeNowJust/heredoc v1.0.0 h1:cXCdzVdstXyiTqTvfqk9SDHpKNjxuom+DOlyEeQ4pzQ=
 github.com/MakeNowJust/heredoc v1.0.0/go.mod h1:mG5amYoWBHf8vpLOuehzbGGw0EHxpZZ6lCpQ4fNJ8LE=
 github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=

@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230302070146-e8e9cb3c3ae2
-	github.com/KusionStack/krm-kcl v0.0.0-20230418113804-d36ac5ce2533
+	github.com/KusionStack/krm-kcl v0.0.0-20230425151359-c282430ece78
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.24.0
 	google.golang.org/grpc v1.50.1
