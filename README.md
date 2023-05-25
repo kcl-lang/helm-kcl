@@ -206,6 +206,10 @@ Here's what you can do in the KCL script:
 
 Full documents of KCL can be found [here](https://kcl-lang.io/).
 
+## Examples
+
+See [here](https://github.com/KusionStack/krm-kcl/tree/main/examples) for more examples.
+
 ## Thanks
 
 + [helmfile](https://github.com/helmfile/helmfile)
