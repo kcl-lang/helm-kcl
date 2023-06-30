@@ -16,7 +16,6 @@ import (
 	"helm.sh/helm/v3/pkg/chart/loader"
 	. "helm.sh/helm/v3/pkg/repo"
 	"helm.sh/helm/v3/pkg/strvals"
-	"sigs.k8s.io/yaml"
 )
 
 const (
@@ -162,10 +161,6 @@ func loadIndex(data []byte, source string) (*IndexFile, error) {
 
 	if len(data) == 0 {
 		return i, ErrEmptyIndexYaml
-	}
-
-	if err := yaml.UnmarshalStrict(data, i); err != nil {
-		return i, err
 	}
 
 	for name, cvs := range i.Entries {

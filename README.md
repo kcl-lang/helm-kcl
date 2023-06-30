@@ -1,10 +1,10 @@
 # Helm KCL Plugin
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/KusionStack/helm-kcl)](https://goreportcard.com/report/github.com/KusionStack/helm-kcl)
-[![GoDoc](https://godoc.org/github.com/KusionStack/helm-kcl?status.svg)](https://godoc.org/github.com/KusionStack/helm-kcl)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/KusionStack/helm-kcl/blob/main/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kcl-lang/helm-kcl)](https://goreportcard.com/report/github.com/kcl-lang/helm-kcl)
+[![GoDoc](https://godoc.org/github.com/kcl-lang/helm-kcl?status.svg)](https://godoc.org/github.com/kcl-lang/helm-kcl)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/kcl-lang/helm-kcl/blob/main/LICENSE)
 
-[KCL](https://github.com/KusionStack/KCLVM) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
+[KCL](https://github.com/KusionStack/kcl) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
 
 You can use the `Helm-KCL-Plugin` to
 
@@ -17,12 +17,12 @@ You can use the `Helm-KCL-Plugin` to
 ### Using Helm plugin manager (> 2.3.x)
 
 ```shell
-helm plugin install https://github.com/KusionStack/helm-kcl
+helm plugin install https://github.com/kcl-lang/helm-kcl
 ```
 
 ### Pre Helm 2.3.0 Installation
 
-Pick a release tarball from the [releases page](https://github.com/KusionStack/helm-kcl/releases).
+Pick a release tarball from the [releases page](https://github.com/kcl-lang/helm-kcl/releases).
 
 Unpack the tarball in your helm plugins directory ($(helm home)/plugins).
 
@@ -146,7 +146,7 @@ spec:
 + GoLang 1.18+
 
 ```shell
-git clone https://github.com/KusionStack/helm-kcl.git
+git clone https://github.com/kcl-lang/helm-kcl.git
 cd helm-kcl
 go run main.go
 ```
@@ -208,7 +208,7 @@ Full documents of KCL can be found [here](https://kcl-lang.io/).
 
 ## Examples
 
-See [here](https://github.com/KusionStack/krm-kcl/tree/main/examples) for more examples.
+See [here](https://kcl-lang.io/krm-kcl/tree/main/examples) for more examples.
 
 ## Thanks
 

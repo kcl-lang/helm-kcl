@@ -3,8 +3,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"kusionstack.io/helm-kcl/pkg/app"
-	"kusionstack.io/helm-kcl/pkg/config"
+	"kcl-lang.io/helm-kcl/pkg/app"
+	"kcl-lang.io/helm-kcl/pkg/config"
 )
 
 // NewTemplateCmd returns the template command.

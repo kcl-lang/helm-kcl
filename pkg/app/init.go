@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"kusionstack.io/helm-kcl/pkg/helm"
+	"kcl-lang.io/helm-kcl/pkg/helm"
 )
 
 const (
