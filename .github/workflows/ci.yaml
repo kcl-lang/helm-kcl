@@ -2,7 +2,7 @@
 name: CI
 
 env:
-  VERSION_GO: '1.18'
+  VERSION_GO: '1.19'
   VERSION_HELM: 'v3.7.0'
 
 on:
