@@ -10,7 +10,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.12.1
 	k8s.io/helm v2.17.0+incompatible
-	kcl-lang.io/krm-kcl v0.1.6
+	kcl-lang.io/krm-kcl v0.2.2
 )
 
 require (
@@ -167,9 +167,9 @@ require (
 	k8s.io/kube-openapi v0.0.0-20230601164746-7562a1006961 // indirect
 	k8s.io/kubectl v0.27.3 // indirect
 	k8s.io/utils v0.0.0-20230505201702-9f6742963106 // indirect
-	kcl-lang.io/kcl-artifact-go v0.5.0-beta.1 // indirect
-	kcl-lang.io/kcl-go v0.5.0-beta.2 // indirect
-	kcl-lang.io/kpm v0.2.5-0.20230704031037-edf28d262c65 // indirect
+	kcl-lang.io/kcl-artifact-go v0.5.0 // indirect
+	kcl-lang.io/kcl-go v0.5.0 // indirect
+	kcl-lang.io/kpm v0.3.0 // indirect
 	oras.land/oras-go v1.2.3 // indirect
 	oras.land/oras-go/v2 v2.0.2 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
