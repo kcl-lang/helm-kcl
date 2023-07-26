@@ -4,7 +4,7 @@
 [![GoDoc](https://godoc.org/github.com/kcl-lang/helm-kcl?status.svg)](https://godoc.org/github.com/kcl-lang/helm-kcl)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/kcl-lang/helm-kcl/blob/main/LICENSE)
 
-[KCL](https://github.com/KusionStack/kcl) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
+[KCL](https://github.com/kcl-lang/kcl) is a constraint-based record & functional domain language. Full documents of KCL can be found [here](https://kcl-lang.io/).
 
 You can use the `Helm-KCL-Plugin` to
 

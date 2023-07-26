@@ -3,7 +3,7 @@
 # Shamelessly copied from https://github.com/technosophos/helm-template
 
 PROJECT_NAME="helm-kcl"
-PROJECT_GH="KusionStack/$PROJECT_NAME"
+PROJECT_GH="kcl-lang/$PROJECT_NAME"
 export GREP_COLOR="never"
 
 # Convert HELM_BIN and HELM_PLUGIN_DIR to unix if cygpath is
@@ -138,7 +138,7 @@ exit_trap() {
   rmTempDir
   if [ "$result" != "0" ]; then
     echo "Failed to install $PROJECT_NAME"
-    printf '\tFor support, go to https://github.com/KusionStack/helm-kcl.\n'
+    printf '\tFor support, go to https://github.com/kcl-lang/helm-kcl.\n'
   fi
   exit $result
 }
