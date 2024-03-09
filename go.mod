@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230427202446-3255accc518d
 	github.com/spf13/cobra v1.8.0
-	go.uber.org/zap v1.19.0
+	go.uber.org/zap v1.27.0
 	google.golang.org/grpc v1.62.0
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.14.2
@@ -194,8 +194,6 @@ require (
 	go.opentelemetry.io/otel/metric v1.21.0 // indirect
 	go.opentelemetry.io/otel/trace v1.21.0 // indirect
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
-	go.uber.org/atomic v1.10.0 // indirect
-	go.uber.org/goleak v1.2.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
