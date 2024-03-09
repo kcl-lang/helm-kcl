@@ -1,6 +1,6 @@
 module kcl-lang.io/helm-kcl
 
-go 1.19
+go 1.21
 
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230427202446-3255accc518d

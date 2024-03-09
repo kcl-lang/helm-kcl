@@ -36,7 +36,7 @@ curl -L $TARBALL_URL | tar -C $(helm home)/plugins -xzv
 
 #### Prerequisites
 
-+ GoLang 1.19+
++ GoLang 1.21+
 
 Make sure you do not have a version of `helm-kcl` installed. You can remove it by running the command.
 
@@ -143,7 +143,7 @@ spec:
 
 ### Prerequisites
 
-+ GoLang 1.19+
++ GoLang 1.21+
 
 ```shell
 git clone https://github.com/kcl-lang/helm-kcl.git
