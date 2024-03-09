@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230427202446-3255accc518d
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 	go.uber.org/zap v1.24.0
 	google.golang.org/grpc v1.56.1
 	gopkg.in/yaml.v2 v2.4.0
