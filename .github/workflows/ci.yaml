@@ -86,7 +86,7 @@ jobs:
 
       - name: Setup Cygwin
         if: "contains(matrix.shell, 'cygwin')"
-        uses: egor-tensin/setup-cygwin@v3
+        uses: egor-tensin/setup-cygwin@v4
         with:
           platform: x64
 
