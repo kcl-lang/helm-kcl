@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Helm
-        uses: azure/setup-helm@v1.1
+        uses: azure/setup-helm@v3.5
         with:
           version: ${{ env.VERSION_HELM }}
 
@@ -106,7 +106,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Helm
-        uses: azure/setup-helm@v1.1
+        uses: azure/setup-helm@v3.5
         with:
           version: ${{ env.VERSION_HELM }}
 
