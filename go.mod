@@ -8,7 +8,7 @@ require (
 	go.uber.org/zap v1.19.0
 	google.golang.org/grpc v1.62.1
 	gopkg.in/yaml.v2 v2.4.0
-	helm.sh/helm/v3 v3.14.2
+	helm.sh/helm/v3 v3.14.3
 	k8s.io/helm v2.17.0+incompatible
 	kcl-lang.io/krm-kcl v0.8.2
 )
@@ -47,7 +47,7 @@ require (
 	github.com/chai2010/jsonv v1.1.3 // indirect
 	github.com/chai2010/protorpc v1.1.4 // indirect
 	github.com/cloudflare/circl v1.3.7 // indirect
-	github.com/containerd/containerd v1.7.11 // indirect
+	github.com/containerd/containerd v1.7.12 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
