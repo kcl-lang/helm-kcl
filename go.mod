@@ -6,7 +6,7 @@ require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230427202446-3255accc518d
 	github.com/spf13/cobra v1.8.0
 	go.uber.org/zap v1.19.0
-	google.golang.org/grpc v1.63.0
+	google.golang.org/grpc v1.63.2
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.14.4
 	k8s.io/helm v2.17.0+incompatible
