@@ -1,11 +1,11 @@
 module kcl-lang.io/helm-kcl
 
 go 1.21
-toolchain go1.22.2
+toolchain go1.22.4
 
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go/fn v0.0.0-20230427202446-3255accc518d
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	go.uber.org/zap v1.26.0
 	google.golang.org/grpc v1.64.0
 	gopkg.in/yaml.v2 v2.4.0
