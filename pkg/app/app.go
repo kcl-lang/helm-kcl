@@ -7,12 +7,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/GoogleContainerTools/kpt-functions-sdk/go/fn"
 	"go.uber.org/zap"
 	"helm.sh/helm/v3/pkg/chart"
 	"kcl-lang.io/helm-kcl/pkg/config"
 	"kcl-lang.io/helm-kcl/pkg/helm"
-	"kcl-lang.io/krm-kcl/pkg/process"
+	"kcl-lang.io/krm-kcl/pkg/kube"
 )
 
 // App is the main application object.
@@ -91,7 +90,7 @@ func (app *App) renderManifests(release, chartPath string) ([]byte, error) {
 			return nil, err
 		}
 	}
-	manifests, err := app.render.GenerateManifests(release, fn.DefaultNamespace, chart, nil)
+	manifests, err := app.render.GenerateManifests(release, "default", chart, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -99,25 +98,23 @@ func (app *App) renderManifests(release, chartPath string) ([]byte, error) {
 }
 
 func (app *App) doMutate(manifests, fnCfg []byte) (string, error) {
-	items, err := fn.ParseKubeObjects(manifests)
+	items, err := kube.ParseKubeObjects(manifests)
 	if err != nil {
 		return "", err
 	}
-	functionConfig, err := fn.ParseKubeObject(fnCfg)
+	functionConfig, err := kube.ParseKubeObject(fnCfg)
 	if err != nil {
 		return "", err
 	}
 	// Construct resource list.
-	resourceList := &fn.ResourceList{
+	resourceList := &kube.ResourceList{
 		Items:          items,
 		FunctionConfig: functionConfig,
 	}
-	result, err := process.Process(resourceList)
+	r := &config.KCLRun{}
+	err = r.TransformResourceList(resourceList)
 	if err != nil {
 		return "", err
 	}
-	if !result {
-		return "", errors.New(resourceList.Results.Error())
-	}
-	return resourceList.Items.String(), nil
+	return resourceList.Items.MustString(), nil
 }

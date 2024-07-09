@@ -2,8 +2,8 @@
 name: CI
 
 env:
-  VERSION_GO: '1.21'
-  VERSION_HELM: 'v3.14.2'
+  VERSION_GO: '1.22'
+  VERSION_HELM: 'v3.15.2'
 
 on:
   pull_request:
