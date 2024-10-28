@@ -1,7 +1,7 @@
 name: "kcl"
 # Version is the version of Helm plus the number of official builds for this
 # plugin
-version: "0.9.0"
+version: "0.10.0"
 usage: "Helm KCL Plugin"
 description: "Helm KCL Plugin"
 useTunnel: true
