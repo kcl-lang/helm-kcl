@@ -78,9 +78,9 @@ metadata:
   name: set-annotation
 spec:
   # EDIT THE SOURCE!
-  # This should be your KCL code which preloads the `ResourceList` to `option("resource_list")
+  # This should be your KCL code which preloads the `ResourceList` to `option("items")
   source: |
-    [resource | {if resource.kind == "Deployment": metadata.annotations: {"managed-by" = "helm-kcl-plugin"}} for resource in option("resource_list").items]
+    [resource | {if resource.kind == "Deployment": metadata.annotations: {"managed-by" = "helm-kcl-plugin"}} for resource in option("items")]
 
 repositories:
   - name: workload
@@ -198,7 +198,7 @@ make docker-run-release
 
 Here's what you can do in the KCL script:
 
-+ Read resources from `option("resource_list")`. The `option("resource_list")` complies with the [KRM Functions Specification](https://kpt.dev/book/05-developing-functions/01-functions-specification). You can read the input resources from `option("resource_list")["items"]` and the `functionConfig` from `option("resource_list")["functionConfig"]`.
++ Read resources from `option("items")`. The `option("items")` complies with the [KRM Functions Specification](https://kpt.dev/book/05-developing-functions/01-functions-specification).
 + Return a KPM list for output resources.
 + Return an error using `assert {condition}, {error_message}`.
 + Read the environment variables. e.g. `option("PATH")` (Not yet implemented).
