@@ -1,7 +1,6 @@
 module kcl-lang.io/helm-kcl
 
-go 1.22.0
-toolchain go1.23.1
+go 1.23
 
 require (
 	github.com/spf13/cobra v1.8.1
@@ -10,7 +9,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.16.2
 	k8s.io/helm v2.17.0+incompatible
-	kcl-lang.io/krm-kcl v0.10.4
+	kcl-lang.io/krm-kcl v0.10.7
 )
 
 require (
@@ -71,7 +70,7 @@ require (
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/evanphx/json-patch v5.9.0+incompatible // indirect
 	github.com/exponent-io/jsonpath v0.0.0-20151013193312-d6023ce2651d // indirect
-	github.com/fatih/color v1.17.0 // indirect
+	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fxamacker/cbor/v2 v2.7.0 // indirect
 	github.com/getkin/kin-openapi v0.128.0 // indirect
@@ -197,7 +196,7 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/xlab/treeprint v1.2.0 // indirect
-	github.com/yuin/goldmark v1.7.4 // indirect
+	github.com/yuin/goldmark v1.7.8 // indirect
 	go.mongodb.org/mongo-driver v1.14.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.53.0 // indirect
@@ -239,11 +238,11 @@ require (
 	k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340 // indirect
 	k8s.io/kubectl v0.31.1 // indirect
 	k8s.io/utils v0.0.0-20240711033017-18e509b52bc8 // indirect
-	kcl-lang.io/cli v0.10.4 // indirect
-	kcl-lang.io/kcl-go v0.10.3 // indirect
+	kcl-lang.io/cli v0.10.7 // indirect
+	kcl-lang.io/kcl-go v0.10.7 // indirect
 	kcl-lang.io/kcl-openapi v0.9.0 // indirect
 	kcl-lang.io/kpm v0.10.0 // indirect
-	kcl-lang.io/lib v0.10.3 // indirect
+	kcl-lang.io/lib v0.10.7 // indirect
 	oras.land/oras-go v1.2.6 // indirect
 	oras.land/oras-go/v2 v2.5.0 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
