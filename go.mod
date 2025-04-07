@@ -6,7 +6,7 @@ toolchain go1.24.1
 require (
 	github.com/spf13/cobra v1.9.1
 	go.uber.org/zap v1.27.0
-	google.golang.org/grpc v1.71.0
+	google.golang.org/grpc v1.71.1
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.17.2
 	k8s.io/helm v2.17.0+incompatible
