@@ -8,7 +8,7 @@ require (
 	go.uber.org/zap v1.27.0
 	google.golang.org/grpc v1.71.1
 	gopkg.in/yaml.v2 v2.4.0
-	helm.sh/helm/v3 v3.17.2
+	helm.sh/helm/v3 v3.17.3
 	k8s.io/helm v2.17.0+incompatible
 	kcl-lang.io/krm-kcl v0.11.1
 )
