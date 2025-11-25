@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/spf13/cobra v1.9.1
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 	google.golang.org/grpc v1.75.0
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.18.6
