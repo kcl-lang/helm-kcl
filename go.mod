@@ -5,7 +5,7 @@ go 1.25.8
 require (
 	github.com/spf13/cobra v1.10.2
 	go.uber.org/zap v1.27.1
-	google.golang.org/grpc v1.79.2
+	google.golang.org/grpc v1.80.0
 	gopkg.in/yaml.v2 v2.4.0
 	helm.sh/helm/v3 v3.20.1
 	k8s.io/helm v2.17.0+incompatible
@@ -25,7 +25,7 @@ require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20250102033503-faa5f7b0171c // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.30.0 // indirect
+	github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.31.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/metric v0.55.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.55.0 // indirect
 	github.com/MakeNowJust/heredoc v1.0.0 // indirect
