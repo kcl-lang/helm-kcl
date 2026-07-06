@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"go.uber.org/zap"
+	"gopkg.in/yaml.v2"
 	"helm.sh/helm/v3/pkg/chart"
 	"kcl-lang.io/helm-kcl/pkg/config"
 	"kcl-lang.io/helm-kcl/pkg/helm"
@@ -112,6 +113,9 @@ func (app *App) doMutate(manifests, fnCfg []byte) (string, error) {
 		FunctionConfig: functionConfig,
 	}
 	r := &config.KCLRun{}
+	if err := yaml.Unmarshal(fnCfg, r); err != nil {
+		return "", err
+	}
 	err = r.TransformResourceList(resourceList)
 	if err != nil {
 		return "", err
