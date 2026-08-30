@@ -75,27 +75,41 @@ func (app *App) template(kclRunFile, release, chartPath string) error {
 
 // Generate Kubernetes manifests from helm charts.
 func (app *App) renderManifests(release, chartPath string) ([]byte, error) {
-	var chart *chart.Chart
-	_, err := url.Parse(chartPath)
-	// Load from url
-	if err != nil {
+	var (
+		chart *chart.Chart
+		err   error
+	)
+	// url.Parse succeeds for both URLs and local paths because it only
+	// validates URL syntax (it does not, e.g., check the scheme). Use the
+	// parsed scheme instead to decide between fetching the chart remotely
+	// and loading it from a local directory.
+	if u, parseErr := url.Parse(chartPath); parseErr == nil && isRemoteChartURL(u) {
 		// Load from url
 		chart, err = app.render.LoadChartFromRemoteCharts(chartPath)
-		if err != nil {
-			return nil, err
-		}
 	} else {
 		// Load from local path
 		chart, err = app.render.LoadChartFromLocalDirectory(chartPath)
-		if err != nil {
-			return nil, err
-		}
+	}
+	if err != nil {
+		return nil, err
 	}
 	manifests, err := app.render.GenerateManifests(release, "default", chart, nil)
 	if err != nil {
 		return nil, err
 	}
 	return manifests, nil
+}
+
+// isRemoteChartURL reports whether the parsed URL refers to a remote Helm
+// chart (HTTP(S) or OCI) rather than a local filesystem path. Paths like
+// "./charts/foo" parse successfully but have an empty scheme, so they fall
+// through to the local-loader branch.
+func isRemoteChartURL(u *url.URL) bool {
+	switch u.Scheme {
+	case "http", "https", "oci":
+		return true
+	}
+	return false
 }
 
 func (app *App) doMutate(manifests, fnCfg []byte) (string, error) {
